@@ -11164,6 +11164,238 @@
         }
       }
     },
+    "modifier-key.name.left-command" : {
+      "comment" : "Label for the left Command (⌘) key, shown when a mouse button is mapped to pressing that modifier key by itself.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "⌘"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "⌘"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "⌘"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "⌘"
+          }
+        }
+      }
+    },
+    "modifier-key.name.left-control" : {
+      "comment" : "Label for the left Control (⌃) key, shown when a mouse button is mapped to pressing that modifier key by itself.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "⌃"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "⌃"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "⌃"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "⌃"
+          }
+        }
+      }
+    },
+    "modifier-key.name.left-option" : {
+      "comment" : "Label for the left Option (⌥) key, shown when a mouse button is mapped to pressing that modifier key by itself.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "⌥"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "⌥"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "⌥"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "⌥"
+          }
+        }
+      }
+    },
+    "modifier-key.name.left-shift" : {
+      "comment" : "Label for the left Shift (⇧) key, shown when a mouse button is mapped to pressing that modifier key by itself.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "⇧"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "⇧"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "⇧"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "⇧"
+          }
+        }
+      }
+    },
+    "modifier-key.name.right-command" : {
+      "comment" : "Label for the right Command (⌘) key, shown when a mouse button is mapped to pressing that modifier key by itself. E.g. for triggering voice input.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Right ⌘"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "右 ⌘"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "右 ⌘"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "右 ⌘"
+          }
+        }
+      }
+    },
+    "modifier-key.name.right-control" : {
+      "comment" : "Label for the right Control (⌃) key, shown when a mouse button is mapped to pressing that modifier key by itself.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Right ⌃"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "右 ⌃"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "右 ⌃"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "右 ⌃"
+          }
+        }
+      }
+    },
+    "modifier-key.name.right-option" : {
+      "comment" : "Label for the right Option (⌥) key, shown when a mouse button is mapped to pressing that modifier key by itself.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Right ⌥"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "右 ⌥"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "右 ⌥"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "右 ⌥"
+          }
+        }
+      }
+    },
+    "modifier-key.name.right-shift" : {
+      "comment" : "Label for the right Shift (⇧) key, shown when a mouse button is mapped to pressing that modifier key by itself.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Right ⇧"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "右 ⇧"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "右 ⇧"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "右 ⇧"
+          }
+        }
+      }
+    },
     "natural-scrolling-hint" : {
       "comment" : "",
       "extractionState" : "manual",
