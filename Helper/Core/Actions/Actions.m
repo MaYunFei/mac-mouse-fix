@@ -23,6 +23,7 @@
 */
 #import "SymbolicHotKeys.h"
 #import <Carbon/Carbon.h>
+#import <IOKit/hidsystem/IOLLEvent.h>
 
 @implementation Actions
 
@@ -225,8 +226,35 @@ static void postKeyboardShortcut(CGKeyCode keyCode, CGSModifierFlags modifierFla
     /// Create key events
     CGEventRef keyUp = CGEventCreateKeyboardEvent(NULL, keyCode, false);
     CGEventRef keyDown = CGEventCreateKeyboardEvent(NULL, keyCode, true);
-    CGEventSetFlags(keyDown, (CGEventFlags)modifierFlags);
-    CGEventSetFlags(keyUp, (CGEventFlags)modifierFlags);
+    
+    /// Handle modifier keys (e.g. Right Command, Right Option, Right Control, Right Shift)
+    ///     Explanation: Standalone modifier keys don't emit keyDown/keyUp events, but `flagsChanged` events. We capture them (see `KeyCaptureMode`) as a keyCode + the flags at press time.
+    ///     When replaying, we must synthesize the correct device-dependent flag (e.g. `NX_DEVICERCMDKEYMASK` for Right Command) on keyDown, and clear it again on keyUp so apps listening to `flagsChanged` (e.g. voice-input apps) see a proper press/release.
+    CGEventFlags downFlags = (CGEventFlags)modifierFlags;
+    CGEventFlags upFlags = (CGEventFlags)modifierFlags;
+    
+    CGEventFlags modMask = 0;
+    CGEventFlags deviceMask = 0;
+    
+    switch (keyCode) {
+        case kVK_RightCommand: modMask = kCGEventFlagMaskCommand;   deviceMask = NX_DEVICERCMDKEYMASK; break;
+        case kVK_Command:      modMask = kCGEventFlagMaskCommand;   deviceMask = NX_DEVICELCMDKEYMASK; break;
+        case kVK_RightOption:  modMask = kCGEventFlagMaskAlternate; deviceMask = NX_DEVICERALTKEYMASK; break;
+        case kVK_Option:       modMask = kCGEventFlagMaskAlternate; deviceMask = NX_DEVICELALTKEYMASK; break;
+        case kVK_RightControl: modMask = kCGEventFlagMaskControl;   deviceMask = NX_DEVICERCTLKEYMASK;  break;
+        case kVK_Control:      modMask = kCGEventFlagMaskControl;   deviceMask = NX_DEVICELCTLKEYMASK;  break;
+        case kVK_RightShift:   modMask = kCGEventFlagMaskShift;     deviceMask = NX_DEVICERSHIFTKEYMASK;break;
+        case kVK_Shift:        modMask = kCGEventFlagMaskShift;     deviceMask = NX_DEVICELSHIFTKEYMASK;break;
+        default: break;
+    }
+    
+    if (modMask != 0) {
+        downFlags |= (modMask | deviceMask);
+        upFlags   &= ~(modMask | deviceMask);
+    }
+    
+    CGEventSetFlags(keyDown, downFlags);
+    CGEventSetFlags(keyUp, upFlags);
     
     /// Fix up keyboard type [Aug 2025]
     ///     Explanation: [Aug 2025] When I attach 2 keyboards to my Mac, one ANSI, one JIS, then `CGEventCreateKeyboardEvent()` seems to not match the keyboard type retrieved any other way we know (MFKeyboardTypeCurrent(), LMGetKbdType(), LMGetKbdLast(), CGEventSourceCreate()).

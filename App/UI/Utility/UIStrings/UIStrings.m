@@ -326,6 +326,18 @@ static NSAttributedString *getStringForSystemDefinedEventOrSymbolicHotkey(int ty
     /// Note:
     /// - `font` is passed in to get image attachments to align correctly
     
+    /// Standalone modifier keys (e.g. Right Command, Right Option, Right Control, Right Shift)
+    ///     Note: These have no `MASShortcut.keyCodeString` and no symbolic hotkey, but they are valid shortcuts which we capture via `kCGEventFlagsChanged`.
+    ///     Note: We intentionally do *not* prefix the generic modifier glyph (e.g. `⌘` from `getKeyboardModifierString:`) since the key *is* the modifier.
+    NSString *standaloneModifierString = [UIStrings getStringForStandaloneModifierKeyCode:keyCode];
+    if (standaloneModifierString != nil) {
+        if (font != nil) {
+            return [[NSAttributedString alloc] initWithString:standaloneModifierString attributes:@{NSFontAttributeName: font}];
+        } else {
+            return standaloneModifierString.attributed;
+        }
+    }
+    
     /// Declare statics
     static NSMutableDictionary *_hotKeyCache;
     static CGSSymbolicHotKey _highestSymbolicHotKeyInCache = 0;
@@ -406,6 +418,20 @@ static NSAttributedString *getStringForSystemDefinedEventOrSymbolicHotkey(int ty
         }
         
         return result;
+    }
+}
+
++ (NSString * _Nullable)getStringForStandaloneModifierKeyCode:(CGKeyCode)keyCode {
+    switch (keyCode) {
+        case kVK_RightCommand: return MFLocalizedString(@"modifier-key.name.right-command", @"Right ⌘");
+        case kVK_Command:      return MFLocalizedString(@"modifier-key.name.left-command",  @"⌘");
+        case kVK_RightOption:  return MFLocalizedString(@"modifier-key.name.right-option",  @"Right ⌥");
+        case kVK_Option:       return MFLocalizedString(@"modifier-key.name.left-option",   @"⌥");
+        case kVK_RightControl: return MFLocalizedString(@"modifier-key.name.right-control", @"Right ⌃");
+        case kVK_Control:      return MFLocalizedString(@"modifier-key.name.left-control",  @"⌃");
+        case kVK_RightShift:   return MFLocalizedString(@"modifier-key.name.right-shift",   @"Right ⇧");
+        case kVK_Shift:        return MFLocalizedString(@"modifier-key.name.left-shift",    @"⇧");
+        default:               return nil;
     }
 }
 

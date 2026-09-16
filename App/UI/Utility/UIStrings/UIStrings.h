@@ -30,6 +30,7 @@ typedef enum {
 //+ (NSString *)getButtonStringToolTip:(MFMouseButtonNumber)buttonNumber;
 + (NSString *)getKeyboardModifierString:(CGEventFlags)flags;
 + (NSString *)getKeyboardModifierStringToolTip:(CGEventFlags)flags;
++ (NSString * _Nullable)getStringForStandaloneModifierKeyCode:(CGKeyCode)keyCode;
 + (NSAttributedString *)getStringForKeyCode:(CGKeyCode)keyCode flags:(CGEventFlags)flags font:(NSFont *)font;
 + (NSAttributedString *)getStringForSystemDefinedEvent:(MFSystemDefinedEventType)systemDefinedEventType flags:(CGEventFlags)flags font:(NSFont *)font;
 //+ (NSAttributedString *)stringWithSymbol:(NSString *)symbolName fallback:(NSString *)fallbackString;

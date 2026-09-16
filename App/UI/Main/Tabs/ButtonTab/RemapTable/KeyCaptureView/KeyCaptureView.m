@@ -43,6 +43,18 @@
     self.textStorage.attributedString = attributedString;
 }
 
+#pragma mark - Modifier helpers
+
+/// Returns YES if exactly one of the four modifier categories (⌃⌥⇧⌘) is currently held. In that case it's unambiguous which modifier the user is pressing, so we can show a left/right-specific name.
++ (BOOL)modifierFlagsContainExactlyOneModifier:(CGEventFlags)flags {
+    NSInteger count = 0;
+    if (flags & kCGEventFlagMaskControl)   count++;
+    if (flags & kCGEventFlagMaskAlternate) count++;
+    if (flags & kCGEventFlagMaskShift)     count++;
+    if (flags & kCGEventFlagMaskCommand)   count++;
+    return count == 1;
+}
+
 #pragma mark - Setup
 
 - (void)setupWithCaptureHandler:(CaptureHandler)captureHandler
@@ -165,7 +177,15 @@
                 
 //                DDLogDebug("KeyCapureView: modifiers: %@", binarystring(flags));
                 
-                NSString *modString = [UIStrings getKeyboardModifierString:flags];
+                /// If exactly one modifier is held, show its left/right-specific name (e.g. "Right ⌘"), otherwise show the generic glyphs.
+                NSString *modString = nil;
+                if ([KeyCaptureView modifierFlagsContainExactlyOneModifier:flags]) {
+                    modString = [UIStrings getStringForStandaloneModifierKeyCode:(CGKeyCode)event.keyCode];
+                }
+                if (modString == nil) {
+                    modString = [UIStrings getKeyboardModifierString:flags];
+                }
+                
                 if (modString.length > 0) {
                     self.coolString = modString;
                 } else {
